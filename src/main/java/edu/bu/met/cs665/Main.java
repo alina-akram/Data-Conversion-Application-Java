@@ -1,3 +1,11 @@
+/**
+ * Alina Akram
+ * Course CS-665
+ * Summer 2
+ * Assignment #4
+ * Aug 3, 2020
+ */
+
 package edu.bu.met.cs665;
 
 import edu.bu.met.cs665.example1.Person;
@@ -5,40 +13,38 @@ import org.apache.log4j.Logger;
 // import org.apache.log4j.PropertyConfigurator;
 
 public class Main {
+    //executes methods
 
-  private static Logger logger = Logger.getLogger(Main.class);
+    public static void main(String [] args){
+        //instance, tostring method
+        //inst
+        Customer customer1 = new Customer("Alina", new CustomerId(20), "123-456-7889" );
+        Customer customer2 = new Customer("Zasha", new CustomerId(21), "213-456-5439" );
 
+        CustomerDB db1 = new CustomerDB(); //db instance /first time we use a variable in different classes we have to use the classname the first time.
+        //type before the variable name only means you are declaring the variable. only needed once.
+        db1.addCustomer(customer1); //first customer added.
+        db1.addCustomer(customer2);
 
-  /**
-   * A main method to run examples.
-   *
-   * @param args not used
-   */
-  public static void main(String[] args) {
+        System.out.println("\nTesting the Old System");
+        CustomerOverUsb oldSystem = new CustomerOverUsb(db1); //ini old system
+        oldSystem.printCustomer(new CustomerId(20));
 
-    // This configuration is for setting up the log4j properties file.
-    // It is better to set this using java program arguments.
-    // PropertyConfigurator.configure("log4j.properties");
-
-    // Let us create an object of the Main class.
-    Main m = new Main();
-
-    logger.info(m.doIt());
-
-    logger.trace("Trace Message!");
-    logger.debug("Debug Message!");
-    logger.info("Info Message!");
-    logger.warn("Warn Message!");
-    logger.error("Error Message!");
-    logger.fatal("Fatal Message!");
-
-  }
+        System.out.println("\nTesting the New System");
+        CustomerOverHttps newSystem = new CustomerOverHttps(db1);//testcase
+        newSystem.printCustomer(new CustomerId(20));
 
 
+        System.out.println("\nTesting the Adapter");
+        CustomerData adapter = new HttpstoUSBAdapter(newSystem); //
+        adapter.printCustomer(new CustomerId(20));
+        Customer customer3 = adapter.getCustomer_withUSB(new CustomerId(21));
+        System.out.println(customer3);
 
-  private String doIt() {
-    Person student = new Person("John", "Doe");
-    return student.getLastName() + ',' + student.getLastName();
-  }
+
+//        System.out.println(customer1);
+//        System.out.println(customer2);
+    }
+
 
 }
