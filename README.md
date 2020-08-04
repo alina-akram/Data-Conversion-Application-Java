@@ -1,3 +1,24 @@
+
+#Implementation
+
+How is the flexibility, of your implementation, e.g., how you add or remove in future new
+types?
+
+This application handles the company's goal to allow their legacy system (USB connection to read data from a database stored on an external hard drisk) to run as is and convert the data to the new system (which accesses the customer data using Rest API over Https connection to an external cloud storage server). Since the old system has to be able to access the new system and but maintain the ability to call the old API, we implemented the Adapter Pattern to handle these conversions. The Main.java file demonstrates the execution and translation and the testing of objects. 
+
+
+How is the simplicity and understandability of your implementation?
+
+It is a simple implementation where the two given interfaces of the legacy system and new system have the same methods, the legacy system uses the database for it's list of customers. The Adapter (HttpstoUSBAdapter.java) acts as a middleman which takes in the old system and translates to the new Https system by allowing us to use the old API. The Main.java executes and displays the confirmation that the old system, new and Adapter are working correctly at runtime. 
+
+How you avoided duplicated code?
+
+Aside from the necessary similarity needed in the old and new systems, the simple implementation of the Adapter Pattern allows us to avoid duplicate code. 
+
+
+Github Repo Link: https://github.com/alina-akram/met-cs665-assignment-4-alina-akram
+
+
 # Project Template
 
 This is a Java Maven Project Template

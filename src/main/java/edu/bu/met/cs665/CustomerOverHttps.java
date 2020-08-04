@@ -1,3 +1,10 @@
+/**
+ * Alina Akram
+ * Course CS-665
+ * Summer 2
+ * Assignment #4
+ * Aug 3, 2020
+ */
 package edu.bu.met.cs665;
 
 public class CustomerOverHttps implements CustomerDataOverHttps {
@@ -5,26 +12,22 @@ public class CustomerOverHttps implements CustomerDataOverHttps {
     private CustomerDB httpsDB;
 
     public CustomerOverHttps(CustomerDB h){
-        //constructer
+        //constructor function
         httpsDB = h; //initializing
-
     }
 
     @Override
     public void printCustomer(CustomerId id) {
-        Customer toPrint =  getCustomer_withHttps(id); //gets based on id / returns a customer //type Customer!
+        //Gets a customer based on ID and prints it
+        Customer toPrint =  getCustomer_withHttps(id);
         System.out.println(toPrint);
 
     }
 
     @Override
     public Customer getCustomer_withHttps(CustomerId id) {
-
-
-        //public Customer getViaUsb(CustomerId id){
-        Customer getHttps =  httpsDB.getViaHttps(id); //db methods need a . operator
-
+        //DB method get old system customer based on id
+        Customer getHttps =  httpsDB.getViaHttps(id);
         return getHttps;
     }
-
 }
